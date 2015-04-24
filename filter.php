@@ -83,7 +83,7 @@ class filter_sagecell extends moodle_text_filter {
 
         $newtext = $text; // fullclone is slow and not needed here
 
-        $search = '/\[sagecell][^\[]+\[\/sagecell]/is';
+        $search = '/\[sagecell](.+?)\[\/sagecell]/is';
         $newtext = preg_replace_callback($search, 'filter_sagecell_callback', $newtext);
 
         if (is_null($newtext) or $newtext === $text) {
