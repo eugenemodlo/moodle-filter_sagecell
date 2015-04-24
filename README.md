@@ -27,7 +27,7 @@ Links
 -----
 * Moodle plugin entry: <http://moodle.org/plugins/view.php?plugin=filter_sagecell>
 * Code, Git: <https://github.com/eugenemodlo/moodle-filter_sagecell>
-* Demo : <http://modlo.ccjournals.eu>
+* Demo : <http://modlo.ccjournals.eu/course/view.php?id=3>
 * "Why square brackets?", <http://bitbucket.org/nfreear/timelinewidget/src/tip/filter.php#cl-36>
 
 Notes
