@@ -102,7 +102,10 @@ function filter_sagecell_callback($sagecode) {
     $output=str_ireplace("<p>","\n",$output);
     $output=str_ireplace("</p>","\n",$output);
     $output=str_ireplace("<br>","\n",$output);
-    $output=str_ireplace("&nbsp;"," ",$output);
+    $output=str_ireplace("<br/>","\n",$output);
+    $output=str_ireplace("<br />","\n",$output);
+    $output=str_ireplace("&nbsp;","\x20",$output);
+    $output=str_ireplace("\xc2\xa0","\x20",$output);
     $output=html_entity_decode(strip_tags($output));
     //echo "<script>alert("$sagecode[0]");</script>";
     //echo "<script>alert("$output");</script>";
