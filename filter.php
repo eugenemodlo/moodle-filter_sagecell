@@ -17,7 +17,7 @@
 /**
  * SageCell filter for Moodle 2.0
  *
- *  This filter will replace any Sage code in [sagecell]...[/sagecell] 
+ *  This filter will replace any Sage code in [sagecell]...[/sagecell]
  *  with a Ajax code from http://sagecell.sagemath.org
  *
  * @package    filter
@@ -28,13 +28,26 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Automatic SageCell embedding filter class.
+ *
+ * @package    filter
+ * @subpackage sagecell
+ * @copyright  2015 Eugene Modlo, Sergey Semerikov
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class filter_sagecell extends moodle_text_filter {
 
-    function filter($text, array $options = array()) {
-        global $PAGE;
+    /**
+     * Check text for Sage code in [sagecell]...[/sagecell].
+     *
+     * @param string $text, array $options
+     * @return string
+     */
+    public function filter($text, array $options = array()) {
 
         if (!is_string($text) or empty($text)) {
-            // non string data can not be filtered anyway
+            // Non string data can not be filtered anyway.
             return $text;
         }
 
@@ -42,49 +55,53 @@ class filter_sagecell extends moodle_text_filter {
            // Performance shortcut - if there is no </a> tag, nothing can match.
            return $text;
         }
- 
 
-        $newtext = $text; // fullclone is slow and not needed here
+        $newtext = $text; // Fullclone is slow and not needed here.
 
         $search = '/\[sagecell](.+?)\[\/sagecell]/is';
         $newtext = preg_replace_callback($search, 'filter_sagecell_callback', $newtext);
 
         if (is_null($newtext) or $newtext === $text) {
-            // error or not filtered
+            // Error or not filtered.
             return $text;
         }
 
         return $newtext;
     }
+
 }
 
-
-
+/**
+ * Replace Sage code with embedded SageCell, if possible.
+ *
+ * @param array $sagecode
+ * @return string
+ */
 function filter_sagecell_callback($sagecode) {
-    $output=substr($sagecode[0], strlen("[sagecell]"), strlen($sagecode[0])-strlen("[/sagecell]")-strlen("[sagecell]"));
-    $output=preg_replace("/\<script.*?\<\/script\>/", "", $output);
-    $output=str_ireplace("<p>","\n",$output);
-    $output=str_ireplace("</p>","\n",$output);
-    $output=str_ireplace("<br>","\n",$output);
-    $output=str_ireplace("<br/>","\n",$output);
-    $output=str_ireplace("<br />","\n",$output);
-    $output=str_ireplace("&nbsp;","\x20",$output);
-    $output=str_ireplace("\xc2\xa0","\x20",$output);
-    $output=html_entity_decode(strip_tags($output));
+
+    $output = substr($sagecode[0], strlen("[sagecell]"), strlen($sagecode[0]) - strlen("[/sagecell]") - strlen("[sagecell]"));
+    $output = preg_replace("/\<script.*?\<\/script\>/", "", $output);
+    $output = str_ireplace("<p>", "\n", $output);
+    $output = str_ireplace("</p>", "\n", $output);
+    $output = str_ireplace("<br>", "\n", $output);
+    $output = str_ireplace("<br/>", "\n", $output);
+    $output = str_ireplace("<br />", "\n", $output);
+    $output = str_ireplace("&nbsp;", "\x20", $output);
+    $output = str_ireplace("\xc2\xa0", "\x20", $output);
+    $output = html_entity_decode(strip_tags($output));
 
     $output = "<script src=\"http://sagecell.sagemath.org/static/jquery.min.js\"></script>" .
     "<script src=\"http://sagecell.sagemath.org/embedded_sagecell.js\"></script>" .
     "<script>" .
     "$(function () {" .
         "sagecell.makeSagecell({inputLocation: \"div.compute\"," .
-                               "evalButtonText: \"Evaluate\"," .
-    			   "autoeval: true," .
-    			   "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
+        "evalButtonText: \"Evaluate\"," .
+        "autoeval: true," .
+        "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
     ");" .
     "});" .
-        "</script>" .
+    "</script>" .
     "<div class=\"compute\"><script type=\"text/x-sage\">".$output."</script></div>";
 
     return $output;
 }
-

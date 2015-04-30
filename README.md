@@ -21,7 +21,7 @@ Usage
 -----
 The syntax to embed a Sage code:
 
-    [sagecell]any Sage code[/sagecell]
+    [sagecell]...[/sagecell]
 
 Links
 -----
