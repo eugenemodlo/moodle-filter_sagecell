@@ -17,15 +17,14 @@
 /**
  * SageCell filter for Moodle 2.0
  *
- * @package    filter
- * @subpackage sagecell
+ * @package    filter_sagecell
  * @copyright  2015 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015043000;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2015043000;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->release   = 1.03;
 $plugin->requires  = 2010112400;        // Requires Moodle 2.0
-$plugin->component = 'filter_sagecell'; // Full name of the plugin (used for diagnostics)
+$plugin->component = 'filter_sagecell'; // Full name of the plugin (used for diagnostics).

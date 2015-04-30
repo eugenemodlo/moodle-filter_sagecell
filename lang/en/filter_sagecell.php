@@ -20,8 +20,7 @@
  *  This filter will replace any Sage code in [sagecell]...[/sagecell] 
  *  with a Ajax code from http://sagecell.sagemath.org
  *
- * @package    filter
- * @subpackage sagecell
+ * @package    filter_sagecell
  * @copyright  2015 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

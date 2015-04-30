@@ -17,8 +17,7 @@
 /**
  * SageCell filter for Moodle 2.0
  *
- * @package    filter
- * @subpackage sagecell
+ * @package    filter_sagecell
  * @copyright  2015 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

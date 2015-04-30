@@ -1,4 +1,4 @@
-<?php 
+<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -20,8 +20,7 @@
  *  This filter will replace any Sage code in [sagecell]...[/sagecell]
  *  with a Ajax code from http://sagecell.sagemath.org
  *
- * @package    filter
- * @subpackage sagecell
+ * @package    filter_sagecell
  * @copyright  2015 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,8 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Automatic SageCell embedding filter class.
  *
- * @package    filter
- * @subpackage sagecell
+ * @package    filter_sagecell
  * @copyright  2015 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -41,7 +39,8 @@ class filter_sagecell extends moodle_text_filter {
     /**
      * Check text for Sage code in [sagecell]...[/sagecell].
      *
-     * @param string $text, array $options
+     * @param string $text
+     * @param array $options
      * @return string
      */
     public function filter($text, array $options = array()) {
@@ -52,8 +51,8 @@ class filter_sagecell extends moodle_text_filter {
         }
 
         if (strpos($text, '[sagecell]') === false) {
-           // Performance shortcut - if there is no </a> tag, nothing can match.
-           return $text;
+            // Performance shortcut - if there is no </a> tag, nothing can match.
+            return $text;
         }
 
         $newtext = $text; // Fullclone is slow and not needed here.
