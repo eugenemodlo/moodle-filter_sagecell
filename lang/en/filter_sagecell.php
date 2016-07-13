@@ -17,7 +17,7 @@
 /**
  * SageCell filter for Moodle 3.1
  *
- *  This filter will replace any Sage code in [sagecell]...[/sagecell]
+ *  This filter will replace any Sage code in [sage]...[/sage]
  *  with a Ajax code from http://sagecell.sagemath.org
  *
  * @package    filter_sagecell

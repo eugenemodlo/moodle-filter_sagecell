@@ -17,7 +17,7 @@
 /**
  * SageCell filter for Moodle 3.1
  *
- *  This filter will replace any Sage code in [sagecell]...[/sagecell]
+ *  This filter will replace any Sage code in [sage]...[/sage]
  *  with a Ajax code from http://sagecell.sagemath.org
  *
  * @package    filter_sagecell
@@ -37,7 +37,7 @@ defined('MOODLE_INTERNAL') || die();
 class filter_sagecell extends moodle_text_filter {
 
     /**
-     * Check text for Sage code in [sagecell]...[/sagecell].
+     * Check text for Sage code in [sage]...[/sage].
      *
      * @param string $text
      * @param array $options
@@ -50,14 +50,14 @@ class filter_sagecell extends moodle_text_filter {
             return $text;
         }
 
-        if (strpos($text, '[sagecell]') === false) {
+        if (strpos($text, '[sage]') === false) {
             // Performance shortcut - if there is no </a> tag, nothing can match.
             return $text;
         }
 
         $newtext = $text; // Fullclone is slow and not needed here.
 
-        $search = '/\[sagecell](.+?)\[\/sagecell]/is';
+        $search = '/\[sage](.+?)\[\/sage]/is';
         $newtext = preg_replace_callback($search, 'filter_sagecell_callback', $newtext);
 
         if (is_null($newtext) or $newtext === $text) {
@@ -78,8 +78,10 @@ class filter_sagecell extends moodle_text_filter {
  */
 function filter_sagecell_callback($sagecode) {
 
-    $output = substr($sagecode[0], strlen("[sagecell]"), strlen($sagecode[0]) - strlen("[/sagecell]") - strlen("[sagecell]"));
-    $output = preg_replace("/\<script.*?\<\/script\>/", "", $output);
+    // SageCell code from [sage]...[/sage].
+    $output = $sagecode[1];
+    //$output = substr($sagecode[0], strlen("[sage]"), strlen($sagecode[0]) - strlen("[/sage]") - strlen("[sage]"));
+    //$output = preg_replace("/\<script.*?\<\/script\>/", "", $output);
     $output = str_ireplace("<p>", "\n", $output);
     $output = str_ireplace("</p>", "\n", $output);
     $output = str_ireplace("<br>", "\n", $output);

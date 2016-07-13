@@ -1,12 +1,12 @@
 SageCell
-=============
+========
 
 A Moodle filter plug-in to view results of Sage code using the SageMathCell server. 
 It embeds any code as plain text.
 
 NOTICE: this software is in no way endorsed by or affiliated with the official SageMath project or team.
 
- *  This filter will replace Sage code in [sagecell]...[/sagecell] block 
+ *  This filter will replace Sage code in [sage]...[/sage] block 
  *  with the result of calculations in embedded sagecell.
 
 Installation
@@ -21,7 +21,7 @@ Usage
 -----
 The syntax to embed a Sage code:
 
-    [sagecell]...[/sagecell]
+    [sage]...[/sage]
 
 Links
 -----
