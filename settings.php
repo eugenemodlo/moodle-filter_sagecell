@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * SageCell filter for Moodle 2.0
+ * SageCell filter for Moodle 3.1
  *
  * @package    filter_sagecell
- * @copyright  2015 Eugene Modlo, Sergey Semerikov
+ * @copyright  2015-2016 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
