@@ -28,3 +28,4 @@ $plugin->version   = 2016070800;        // The current plugin version (Date: YYY
 $plugin->release   = 1.04;
 $plugin->requires  = 2016052300;        // Requires Moodle 3.1
 $plugin->component = 'filter_sagecell'; // Full name of the plugin (used for diagnostics).
+$plugin->maturity  = MATURITY_STABLE;
