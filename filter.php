@@ -87,7 +87,7 @@ function filter_sagecell_callback($sagecode) {
     $output = str_ireplace("<br />", "\n", $output);
     $output = str_ireplace("&nbsp;", "\x20", $output);
     $output = str_ireplace("\xc2\xa0", "\x20", $output);
-    $output = html_entity_decode(strip_tags($output));
+    //$output = html_entity_decode(strip_tags($output));
 
     $output = "<script src=\"http://sagecell.sagemath.org/static/jquery.min.js\"></script>" .
     "<script src=\"http://sagecell.sagemath.org/embedded_sagecell.js\"></script>" .
@@ -100,7 +100,7 @@ function filter_sagecell_callback($sagecode) {
     ");" .
     "});" .
     "</script>" .
-    "<div class=\"compute\"><script type=\"text/x-sage\">".$output."</script></div>";
+    "<div class=\"compute\"><script type=\"text/x-sage\">".clean_text($output)."</script></div>";
 
     return $output;
 }
