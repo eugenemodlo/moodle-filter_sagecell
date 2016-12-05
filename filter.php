@@ -88,13 +88,13 @@ function filter_sagecell_callback($sagecode) {
     $output = str_ireplace("&nbsp;", "\x20", $output);
     $output = str_ireplace("\xc2\xa0", "\x20", $output);
     
-    $id = uniqid("#");
+    $id = uniqid("");
 
     $output = "<script src=\"http://sagecell.sagemath.org/static/jquery.min.js\"></script>" .
     "<script src=\"http://sagecell.sagemath.org/embedded_sagecell.js\"></script>" .
     "<script>" .
     "$(function () {" .
-        "sagecell.makeSagecell({inputLocation: \"" . $id . "\"," .
+        "sagecell.makeSagecell({inputLocation: \"#" . $id . "\"," .
         "evalButtonText: \"Evaluate\"," .
         "autoeval: true," .
         "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
