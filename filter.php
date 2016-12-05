@@ -80,8 +80,6 @@ function filter_sagecell_callback($sagecode) {
 
     // SageCell code from [sage]...[/sage].
     $output = $sagecode[1];
-    //$output = substr($sagecode[0], strlen("[sage]"), strlen($sagecode[0]) - strlen("[/sage]") - strlen("[sage]"));
-    //$output = preg_replace("/\<script.*?\<\/script\>/", "", $output);
     $output = str_ireplace("<p>", "\n", $output);
     $output = str_ireplace("</p>", "\n", $output);
     $output = str_ireplace("<br>", "\n", $output);
@@ -89,20 +87,21 @@ function filter_sagecell_callback($sagecode) {
     $output = str_ireplace("<br />", "\n", $output);
     $output = str_ireplace("&nbsp;", "\x20", $output);
     $output = str_ireplace("\xc2\xa0", "\x20", $output);
-    //$output = html_entity_decode(strip_tags($output));
+    
+    $id = uniqid("#");
 
     $output = "<script src=\"http://sagecell.sagemath.org/static/jquery.min.js\"></script>" .
     "<script src=\"http://sagecell.sagemath.org/embedded_sagecell.js\"></script>" .
     "<script>" .
     "$(function () {" .
-        "sagecell.makeSagecell({inputLocation: \"div.compute\"," .
+        "sagecell.makeSagecell({inputLocation: \"" . $id . "\"," .
         "evalButtonText: \"Evaluate\"," .
         "autoeval: true," .
         "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
     ");" .
     "});" .
     "</script>" .
-    "<div class=\"compute\"><script type=\"text/x-sage\">".clean_text($output)."</script></div>";
+    "<div id=\"" . $id . "\"><script type=\"text/x-sage\">".clean_text($output)."</script></div>";
 
     return $output;
 }
