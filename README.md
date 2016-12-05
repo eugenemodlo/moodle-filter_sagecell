@@ -11,7 +11,7 @@ NOTICE: this software is in no way endorsed by or affiliated with the official S
 
 Installation
 ------------
-To install (on Moodle 3.1):
+To install (on Moodle 3.1+):
 
 1. Un-compress the Zip/Gzip archive, and copy the folder renamed 'sagecell' to your moodle/filter/ directory.
 2. Log in to Moodle as admininstrator, go to Site Administration | Plugins | Filters | Manage Filters.
@@ -32,7 +32,7 @@ Links
 
 Notes
 -----
-* Tested in Moodle 3.1.
+* Tested in Moodle 3.1, 3.2.
 * No database access, JavaScript only
 * Filter syntax is case-sensitive.
 

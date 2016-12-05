@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * SageCell filter for Moodle 3.1
+ * SageCell filter for Moodle 3.1+
  *
  *  This filter will replace any Sage code in [sage]...[/sage]
  *  with a Ajax code from http://sagecell.sagemath.org
