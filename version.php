@@ -15,17 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * SageCell filter for Moodle 3.1+
+ * SageCell filter for Moodle 3.4+
  *
  * @package    filter_sagecell
- * @copyright  2015-2016 Eugene Modlo, Sergey Semerikov
+ * @copyright  2015-2018 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016120500;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = 1.05;
-$plugin->requires  = 2016052300;        // Requires Moodle 3.1
+$plugin->version   = 2018013000;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->release   = 1.06;
+$plugin->requires  = 2017111300;        // Requires Moodle 3.4
 $plugin->component = 'filter_sagecell'; // Full name of the plugin (used for diagnostics).
 $plugin->maturity  = MATURITY_STABLE;

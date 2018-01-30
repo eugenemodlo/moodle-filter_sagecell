@@ -15,13 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * SageCell filter for Moodle 3.1+
+ * SageCell filter for Moodle 3.4+
  *
  *  This filter will replace any Sage code in [sage]...[/sage]
  *  with a Ajax code from http://sagecell.sagemath.org
  *
  * @package    filter_sagecell
- * @copyright  2015-2016 Eugene Modlo, Sergey Semerikov
+ * @copyright  2015-2018 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -87,21 +87,21 @@ function filter_sagecell_callback($sagecode) {
     $output = str_ireplace("<br />", "\n", $output);
     $output = str_ireplace("&nbsp;", "\x20", $output);
     $output = str_ireplace("\xc2\xa0", "\x20", $output);
+    $output = clean_text($output);
+    $output = str_ireplace("&lt;", "<", $output);
+    $output = str_ireplace("&gt;", ">", $output);
     
     $id = uniqid("");
 
-    $output = "<script src=\"http://sagecell.sagemath.org/static/jquery.min.js\"></script>" .
-    "<script src=\"http://sagecell.sagemath.org/embedded_sagecell.js\"></script>" .
+    $output = "<script src=\"https://sagecell.sagemath.org/static/embedded_sagecell.js\"></script>" .
     "<script>" .
-    "$(function () {" .
         "sagecell.makeSagecell({inputLocation: \"#" . $id . "\"," .
         "evalButtonText: \"Evaluate\"," .
         "autoeval: true," .
         "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
     ");" .
-    "});" .
     "</script>" .
-    "<div id=\"" . $id . "\"><script type=\"text/x-sage\">".clean_text($output)."</script></div>";
+    "<div id=\"" . $id . "\"><script type=\"text/x-sage\">". $output. "</script></div>";
 
     return $output;
 }
