@@ -78,6 +78,8 @@ class filter_sagecell extends moodle_text_filter {
  */
 function filter_sagecell_callback($sagecode) {
 
+    $server = get_config('filter_sagecell', 'server');
+
     // SageCell code from [sage]...[/sage].
     $output = $sagecode[1];
     $output = str_ireplace("<p>", "\n", $output);
@@ -93,10 +95,10 @@ function filter_sagecell_callback($sagecode) {
 
     $id = uniqid("");
 
-    $output = "<script src=\"https://sagecell.sagemath.org/static/embedded_sagecell.js\"></script>" .
+    $output = "<script src=\"https://" . $server . "/static/embedded_sagecell.js\"></script>" .
     "<script>" .
         "sagecell.makeSagecell({inputLocation: \"#" . $id . "\"," .
-        "evalButtonText: \"Evaluate\"," .
+        "evalButtonText: \"" . get_string('sagecell_evalButtonText', 'filter_sagecell') . "\", " .
         "autoeval: true," .
         "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
     ");" .

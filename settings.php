@@ -17,15 +17,18 @@
 /**
  * SageCell filter for Moodle 3.4+
  *
- *  This filter will replace any Sage code in [sage]...[/sage]
- *  with a Ajax code from http://sagecell.sagemath.org
- *
  * @package    filter_sagecell
  * @copyright  2015-2018 Eugene Modlo, Sergey Semerikov
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['filtername'] = 'SageCell';
-$string['sagecell_evalButtonText'] = 'Evaluate';
-$string['sagecell_server'] = 'SageMathCell server';
-$string['sagecell_server_desc'] = 'Root URL of a SageMathCell server';
+defined('MOODLE_INTERNAL') || die();
+
+if ($ADMIN->fulltree) {
+    // Root url of a SageMathCell server.
+    $settings->add(new admin_setting_configtext('filter_sagecell/server',
+                    get_string('sagecell_server', 'filter_sagecell'),
+                    get_string('sagecell_server_desc', 'filter_sagecell'),
+                    'sagecell.sagemath.org',
+                    PARAM_NOTAGS));
+}
