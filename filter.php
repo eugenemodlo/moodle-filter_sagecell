@@ -90,7 +90,7 @@ function filter_sagecell_callback($sagecode) {
     $output = clean_text($output);
     $output = str_ireplace("&lt;", "<", $output);
     $output = str_ireplace("&gt;", ">", $output);
-    
+
     $id = uniqid("");
 
     $output = "<script src=\"https://sagecell.sagemath.org/static/embedded_sagecell.js\"></script>" .
