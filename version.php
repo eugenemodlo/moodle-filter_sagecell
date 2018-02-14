@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018013000;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = 1.06;
+$plugin->version   = 2018021400;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->release   = 1.1;
 $plugin->requires  = 2017111300;        // Requires Moodle 3.4
 $plugin->component = 'filter_sagecell'; // Full name of the plugin (used for diagnostics).
 $plugin->maturity  = MATURITY_STABLE;

@@ -81,7 +81,7 @@ function filter_sagecell_callback($sagecode) {
     $server = get_config('filter_sagecell', 'server');
 
     // SageCell code from [sage]...[/sage].
-    $output = $sagecode[1];
+    $output = $sagecode[2];
     $output = str_ireplace("<p>", "\n", $output);
     $output = str_ireplace("</p>", "\n", $output);
     $output = str_ireplace("<br>", "\n", $output);
@@ -95,15 +95,43 @@ function filter_sagecell_callback($sagecode) {
 
     $id = uniqid("");
 
+    // Options.
+    $sagecode[1] = strtolower($sagecode[1]);
+    $editor = "";
+    if (strpos($sagecode[1], 'editor') === false) {
+        $editor = "\"editor\", \"language\", ";
+    }
+    $button = "";
+    if (strpos($sagecode[1], 'button') === false) {
+        $button = "\"evalButton\", ";
+    }
+    $noauto = "autoeval: false,";
+    if (strpos($sagecode[1], 'noauto') === false) {
+        $noauto = "autoeval: true,";
+    }
+    $lang = "languages: sagecell.allLanguages,";
+    $k = strpos($sagecode[1], "lang=\"");
+    if ($k != false) {
+        $k += strlen("lang=\"");
+        $lang = substr($sagecode[1], $k);
+        $l = strpos($lang, "\"");
+        if ($l != false) {
+            $lang = "languages: [\"" . substr($lang, 0, $l) . "\"],";
+        } else {
+            $lang = "languages: sagecell.allLanguages,";
+        }
+    }
+
     $output = "<script src=\"https://" . $server . "/static/embedded_sagecell.js\"></script>" .
     "<script>" .
         "sagecell.makeSagecell({inputLocation: \"#" . $id . "\"," .
         "evalButtonText: \"" . get_string('sagecell_evalButtonText', 'filter_sagecell') . "\", " .
-        "autoeval: true," .
-        "hide: [\"evalButton\", \"editor\", \"messages\", \"permalink\", \"language\"] }" .
+        $lang .
+        $noauto .
+        "hide: [" . $button . $editor . "\"messages\", \"permalink\"] }" .
     ");" .
     "</script>" .
-    "<div id=\"" . $id . "\"><script type=\"text/x-sage\">". $output. "</script></div>";
+    "<div id=\"" . $id . "\"><script type=\"text/x-sage\">". $output . "</script></div>";
 
     return $output;
 }
